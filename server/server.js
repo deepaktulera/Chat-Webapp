@@ -1,10 +1,26 @@
 const express = require('express');
+const dotenv = require('dotenv');
+const chats = require('./data');
+
 
 const app = express();
+dotenv.config();
 
 app.get('/' , (req , res) =>{
-    res.send("Hello World")
+    res.send("Api Is Running")
 });
 
+app.get('/api/chat' , (req , res)=>{
+    res.send(chats)
+    res.send("Hello")
+})
 
-app.listen(3000 , console.log("Server Started"))
+app.get('/api/chat/:id' , (req , res) =>{
+    const singleChat = chats.find(item => item._id === req.params.id)
+    res.send(singleChat)
+})
+
+const PORT = process.env.PORT || 5000
+
+
+app.listen(PORT , console.log("Server Started"))
