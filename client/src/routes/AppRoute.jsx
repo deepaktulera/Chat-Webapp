@@ -1,11 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import HomePage from '../pages/HomePage';
+import ChatPage from '../pages/ChatPage';
 
 const AppRoute = () => {
   return (
     <Routes>
-        <Route path='/'/>
-        <Route path='/chat'/>
+        <Route path='/' element={<HomePage />}/>
+        <Route path='/chats' element={<ChatPage />} />
     </Routes>
   );
 }
