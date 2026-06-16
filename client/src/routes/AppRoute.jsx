@@ -7,6 +7,7 @@ const AppRoute = () => {
   return (
     <Routes>
         <Route path='/' element={<HomePage />}/>
+        <Route path='/:id' element={<HomePage />}/>
         <Route path='/chats' element={<ChatPage />} />
     </Routes>
   );

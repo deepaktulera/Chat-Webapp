@@ -3,7 +3,7 @@ import AppRoute from './routes/AppRoute';
 
 const App = () => {
   return (
-    <div>
+    <div className='h-screen w-screen'>
       <AppRoute />
     </div>
   );
