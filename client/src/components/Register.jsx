@@ -1,8 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
     <form className="flex flex-col gap-4">
+      <input
+        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white placeholder-gray-300"
+        type="text"
+        placeholder="Enter your name"
+      />
       <input
         className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white placeholder-gray-300"
         type="email"
@@ -29,7 +35,7 @@ const Register = () => {
       </button>
 
       <p className="text-center text-sm text-gray-300">
-        Create your account 🚀
+        Already Have account ? <Link className="text-green-600 font-semibold" to={"/login"}>Login</Link>
       </p>
     </form>
   );

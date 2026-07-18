@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema(
   {
-    userName: {
+    username: {
       type: String,
       required: true,
     },
@@ -16,7 +16,6 @@ const userSchema = mongoose.Schema(
     },
     picture: {
       type: String,
-      required: true,
       default:
         "https://i.pinimg.com/originals/13/74/20/137420f5b9c39bc911e472f5d20f053e.jpg?nii=t",
     },

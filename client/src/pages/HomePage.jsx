@@ -18,31 +18,6 @@ const HomePage = () => {
         <h1 className="text-3xl font-bold text-center text-white mb-6">
           Chat App 💬
         </h1>
-
-        <div className="flex mb-6 bg-white/10 rounded-lg overflow-hidden">
-          <Link
-            to="/login"
-            className={`flex-1 py-3 text-center font-medium transition ${
-              id === "login"
-                ? "bg-blue-500 text-white"
-                : "text-gray-300 hover:bg-white/10"
-            }`}
-          >
-            Login
-          </Link>
-
-          <Link
-            to="/register"
-            className={`flex-1 py-3 text-center font-medium transition ${
-              id === "register"
-                ? "bg-blue-500 text-white"
-                : "text-gray-300 hover:bg-white/10"
-            }`}
-          >
-            Register
-          </Link>
-        </div>
-
         {id === "login" ? <Login /> : <Register />}
       </div>
     </div>

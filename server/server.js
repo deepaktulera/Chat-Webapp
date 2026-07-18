@@ -2,10 +2,12 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import connectDatabase from './config/database.js'
-import chatRoute from './routes/chats.routes.js'
+import chatRoutes from './routes/chats.routes.js'
+import authRoutes from './routes/auth.routes.js'
 
 const app = express();
 dotenv.config();
+app.use(express.json());
 
 app.use(cors({
     origin: 'http://localhost:5173'
@@ -20,7 +22,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use('/chats' , chatRoute)
+app.use('/chats' , chatRoutes)
+app.use('/auth' , authRoutes)
 
 const PORT = process.env.PORT || 3100;
 
