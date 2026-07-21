@@ -37,14 +37,18 @@ export const loginUser = async (req, res) => {
         expiresIn: "7d",
       },
     );
+    
 
     res.status(200).json({
       message: "User logged in successfully",
+      id : user._id,
+      avtar : user.picture,
+      name : user.username,
       token,
-      user : {id: user._id, name: user.username , avtar : user.picture}
     });
   } catch (error) {
     return res.status(500).json({
+      
       message: error.message,
     });
   }
