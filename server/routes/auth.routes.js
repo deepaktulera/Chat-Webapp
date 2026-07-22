@@ -1,9 +1,24 @@
-import express from 'express';
-import { loginUser, registerUser } from '../controllers/auth.controller.js';
+import express from "express";
+import upload from "../middlewares/upload.js";
+import {
+  loginUser,
+  logoutUser,
+  registerUser,
+} from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
-router.post("/login" , loginUser);
-router.post("/register" , registerUser);
+// Register User (Upload Profile Picture)
+router.post(
+  "/register",
+  upload.single("picture"),
+  registerUser
+);
 
-export default router
+// Login User
+router.post("/login", loginUser);
+
+// Logout User
+router.post("/logout", logoutUser);
+
+export default router;

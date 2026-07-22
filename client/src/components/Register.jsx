@@ -3,21 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../services/authServices";
 
 const Register = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const [FormData, setFormData] = useState({
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
-    avtar: null,
+    picture: null,
   });
 
-  function handleChange({ target }) {
-    const { name, value, files } = target;
+  function handleChange(e) {
+    const { name, value, files } = e.target;
 
-    setFormData((prev) => ({
+    setForm((prev) => ({
       ...prev,
       [name]: files ? files[0] : value,
     }));
@@ -25,27 +26,32 @@ const Register = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setIsLoading(true);
+
+    if (form.password !== form.confirmPassword) {
+      return alert("Passwords do not match");
+    }
 
     try {
-      if (FormData.password !== FormData.confirmPassword) {
-        alert("Passwords do not match");
-        return;
+      setIsLoading(true);
+
+      const formData = new FormData();
+
+      formData.append("username", form.username);
+      formData.append("email", form.email);
+      formData.append("password", form.password);
+
+      if (form.picture) {
+        formData.append("picture", form.picture);
       }
 
-      await registerUser(FormData);
+      await registerUser(formData);
 
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        avtar: null,
-      });
+      alert("Registration Successful");
 
       navigate("/login");
     } catch (error) {
       console.log(error);
+      alert(error.response?.data?.message || "Registration Failed");
     } finally {
       setIsLoading(false);
     }
@@ -54,61 +60,60 @@ const Register = () => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <input
-        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white placeholder-gray-300"
         type="text"
         name="username"
-        value={FormData.username}
+        placeholder="Enter Username"
+        value={form.username}
         onChange={handleChange}
-        placeholder="Enter your name"
-        required
+        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white"
       />
+
       <input
-        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white placeholder-gray-300"
         type="email"
         name="email"
-        value={FormData.email}
+        placeholder="Enter Email"
+        value={form.email}
         onChange={handleChange}
-        placeholder="Enter your email"
-        required
+        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white"
       />
 
       <input
-        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white placeholder-gray-300"
         type="password"
         name="password"
-        value={FormData.password}
+        placeholder="Enter Password"
+        value={form.password}
         onChange={handleChange}
-        placeholder="Enter your password"
-        required
+        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white"
       />
 
       <input
-        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white placeholder-gray-300"
         type="password"
         name="confirmPassword"
-        value={FormData.confirmPassword}
+        placeholder="Confirm Password"
+        value={form.confirmPassword}
         onChange={handleChange}
-        placeholder="Confirm your password"
-        required
+        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white"
       />
 
       <input
-        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white placeholder-gray-300"
         type="file"
-        name="avatar"
+        name="picture"
+        accept="image/*"
         onChange={handleChange}
+        className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 outline-none text-white"
       />
 
       <button
         type="submit"
-        className="py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold transition"
+        disabled={isLoading}
+        className="py-3 rounded-lg bg-green-500 hover:bg-green-600 text-white"
       >
-        Register
+        {isLoading ? "Registering..." : "Register"}
       </button>
 
       <p className="text-center text-sm text-gray-300">
-        Already Have account ?{" "}
-        <Link className="text-green-600 font-semibold" to={"/login"}>
+        Already have an account?{" "}
+        <Link className="text-green-500" to="/login">
           Login
         </Link>
       </p>

@@ -1,12 +1,13 @@
-import express from 'express'
 import dotenv from 'dotenv'
+dotenv.config();
+
+import express from 'express'
 import cors from 'cors'
 import connectDatabase from './config/database.js'
 import chatRoutes from './routes/chats.routes.js'
 import authRoutes from './routes/auth.routes.js'
 
 const app = express();
-dotenv.config();
 app.use(express.json());
 
 app.use(cors({

@@ -1,13 +1,20 @@
 import api from "./axios";
 
-// Service function to register a new user
-export const registerUser = async (userData) => {
-  // Send user registration data to the backend API
-  return await api.post("/auth/register", userData);
+// Register User
+export const registerUser = async (formData) => {
+  return await api.post("/auth/register", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
-// Service function to login an existing user
+// Login User
 export const loginUser = async (userData) => {
-  // Send login credentials to the backend API
   return await api.post("/auth/login", userData);
+};
+
+// Logout User
+export const logoutUser = async () => {
+  return await api.post("/auth/logout");
 };

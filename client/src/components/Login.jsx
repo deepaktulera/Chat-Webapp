@@ -34,13 +34,13 @@ const Login = () => {
       const response = await loginUser(formData);
 
       // Extract user authentication data
-      const { token, id , name , avtar} = response.data;
+      const { token, id , name , picture} = response.data;
 
       // Store user information locally
       localStorage.setItem("token", token);
       localStorage.setItem("name", name);
       localStorage.setItem("id", id);
-      localStorage.setItem("avtar", avtar);
+      localStorage.setItem("avtar", picture);
       // Reset form fields
       setFormData({
         email: "",
@@ -59,7 +59,6 @@ const Login = () => {
     }
   };
 
-  // localStorage.clear()
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <input

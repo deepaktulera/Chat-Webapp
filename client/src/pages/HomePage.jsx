@@ -18,7 +18,7 @@ const HomePage = () => {
         <h1 className="text-3xl font-bold text-center text-white mb-6">
           Chat App 💬
         </h1>
-        {id === "login" ? <Login /> : <Register />}
+        {id === "register" ? <Register /> : <Login />}
       </div>
     </div>
   );
