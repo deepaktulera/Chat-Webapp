@@ -4,15 +4,16 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const name = localStorage.getItem("name");
-  const avatar = localStorage.getItem("avtar");
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
+  
+  
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("id");
-    localStorage.removeItem("name");
-    localStorage.removeItem("avtar");
+    localStorage.removeItem("user")
 
     navigate("/login");
 };
@@ -22,7 +23,7 @@ const Header = () => {
       {/* Left */}
       <div className="relative group flex items-center">
         <img
-          src={avatar}
+          src={user.picture}
           alt="Profile"
           className="aspect-square w-12 object-center rounded-full object-cover border-2 border-blue-500 cursor-pointer transition-transform duration-300 group-hover:scale-105"
         />
@@ -30,7 +31,7 @@ const Header = () => {
         {/* Tooltip */}
         <div className="absolute left-14 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
           <div className="bg-white text-zinc-500 dark:bg-zinc-950 dark:text-white text-sm px-3 py-1 rounded-lg shadow-lg whitespace-nowrap">
-            {name}
+            {user.name}
           </div>
         </div>
       </div>

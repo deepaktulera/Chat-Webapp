@@ -5,7 +5,7 @@ import cloudinary from "../config/cloudinary.js";
 const storage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => ({
-    folder: "",
+    folder: "chat-app/profile",
     public_id: `${Date.now()}-${file.originalname.split(".")[0]}`,
     allowed_formats: ["jpg", "jpeg", "png", "webp"],
   }),

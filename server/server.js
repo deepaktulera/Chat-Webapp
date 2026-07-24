@@ -6,6 +6,7 @@ import cors from 'cors'
 import connectDatabase from './config/database.js'
 import chatRoutes from './routes/chats.routes.js'
 import authRoutes from './routes/auth.routes.js'
+import userRoutes from './routes/user.routes.js'
 
 const app = express();
 app.use(express.json());
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 
 app.use('/chats' , chatRoutes)
 app.use('/auth' , authRoutes)
+app.use('/user' , userRoutes)
 
 const PORT = process.env.PORT || 3100;
 

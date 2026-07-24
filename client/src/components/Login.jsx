@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authServices";
+import { AuthContext } from "../context/authContext";
 
 const Login = () => {
+  const { setUser } = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate()
+
 
   const [formData, setFormData] = useState({
     email: "",
@@ -34,23 +37,25 @@ const Login = () => {
       const response = await loginUser(formData);
 
       // Extract user authentication data
-      const { token, id , name , picture} = response.data;
+      const { token, user} = response.data;
+      console.log(user);
+      
 
       // Store user information locally
       localStorage.setItem("token", token);
-      localStorage.setItem("name", name);
-      localStorage.setItem("id", id);
-      localStorage.setItem("avtar", picture);
+      localStorage.setItem("user" , JSON.stringify(user))
       // Reset form fields
       setFormData({
         email: "",
         password: "",
       });
+      setUser(response.data.user);
 
       // Show success message and redirect
       navigate("/chats");
     } catch (error) {
       // Show login error message
+      alert(error.response.data.message)
       console.log(error.message);
       
     } finally {

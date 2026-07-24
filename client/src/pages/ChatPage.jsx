@@ -36,11 +36,11 @@ const ChatPage = () => {
           </div>
 
           {/* Chat List */}
-          <div className="flex-1 overflow-y-auto px-2 pb-2">
+          <div className="flex-1 overflow-y-auto h-full px-2 pb-2">
             {chats.map((item) => (
               <div
                 key={item._id}
-                className="flex items-center gap-3 p-3 rounded-xl cursor-pointer bg-white text-zinc-500 dark:bg-zinc-950 dark:text-white transition-all duration-200"
+                className="flex items-center gap-3 p-3 rounded-xl cursor-pointer overflow-y-auto bg-white text-zinc-500 dark:bg-zinc-950 dark:text-white transition-all duration-200"
               >
                 {/* Avatar */}
                 <img
@@ -74,7 +74,7 @@ const ChatPage = () => {
         </section>
 
         {/* Chat Area */}
-        <section className="bg-white text-zinc-500 dark:bg-zinc-950 dark:text-white flex items-center justify-center">
+        <section className="bg-white hidden text-zinc-500 dark:bg-zinc-950 dark:text-white sm:flex items-center justify-center">
           <div className="text-center text-zinc-500">
             <img
               src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png"
